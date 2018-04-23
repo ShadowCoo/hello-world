@@ -1,0 +1,29 @@
+#include <iostream>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui.hpp"
+using namespace std;
+using namespace cv;
+//低通滤波
+
+int main()
+{
+	Mat src;
+	Mat dst, dst1, dst2, dst3;
+	src = imread("zaosheng.jpg");
+	imshow("original image", src);
+	if (src.empty()) {
+		printf(" Error opening image\n");
+		return -1;
+	}
+	blur(src, dst, Size(3, 3));
+	imshow("33低通滤波", dst);
+	GaussianBlur(src, dst1, Size(3, 3), 0);
+	imshow("GaussianBlur", dst1);
+	medianBlur(src, dst2, 3);
+	imshow("medianBlur", dst2);
+	bilateralFilter(src, dst3, 9, 9,4);
+	imshow("bilateralBlur", dst3);
+	waitKey();
+	return 0;
+}
